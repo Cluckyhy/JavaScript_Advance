@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_this指向的分析</title>
+    <!-- 
+      1、函数在调用时，javascript会默认给this绑定一个值。
+      2、this的绑定和定义的位置（编写的位置）没有关系；
+      3、this的绑定和调用方式以及调用的位置有关系
+      4、this是在运行时被绑定的
+
+      this的绑定规则有哪些？
+        1、默认绑定
+        2、隐式绑定
+        3、显示绑定
+        4、new 绑定
+    -->
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 定义函数
+      function foo() {
+        console.log("foo函数", this);
+      }
+
+      // 1、方式一：直接调用
+      foo();
+
+      // 2、方式二：通过对象调用
+      var obj = {name: 'chy'}
+      obj.foo = foo
+      obj.foo()
+    </script>
+  </body>
+</html>

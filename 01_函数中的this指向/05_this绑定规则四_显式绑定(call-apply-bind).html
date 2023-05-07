@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05_this绑定规则四_显式绑定(call-apply-bind)</title>
+    <!-- 
+      call、apply、bind
+      如果我们不希望在对象内部包含这个函数的引用，同时又希望在这个对象上进行强制调用，该怎么做呢？
+        第一个参数是相同的，要求传入一个对象：
+          这个对象的作用是：就是给this准备的
+          在调用这个函数时，会将this绑定到这个传入的对象上。
+        后面的参数，call和普通函数传参一样，参数列表；apply为数组
+
+      我们明确的绑定了this指向对象，所有称之为 显示绑定
+     -->
+  </head>
+  <body>
+    <script type="text/javascript">
+      var obj = {
+        name: "chy",
+      };
+
+      function foo(name, age, address) {
+        console.log("foo函数", this, name, age, address);
+      }
+
+      // call执行函数，并且函数中的this指向obj对象，参数列表
+      foo.call(obj, "李白", 22);
+      foo.call(123);
+      foo.call("chy");
+      foo.call(undefined); // 指向window
+
+      console.log("-------------------------------------");
+
+      // apply执行函数，参数以数组形式
+      foo.apply(obj, ["李白", 22]);
+      foo.apply(123);
+      foo.apply("chy");
+      foo.apply(undefined); // 指向window
+
+      console.log("-------------------------------------");
+
+      /* 
+        需求：调用foo时，总是绑定到obj对象身上（不希望obj对象身上有函数）
+        如果我们希望一个函数总是显示的绑定到一个对象上，可以使用bind函数
+        使用bind方法：bind()方法返回一个【新的】绑定函数 (bound funciton，BF)
+      */
+
+      // bind函数的基本使用，参数和call一样
+      var bar = foo.bind(obj, "露露", 19);
+
+      // 这里的参数会作为第三个参数，而不是第一个参数
+      bar("赣州");
+      bar();
+      bar();
+      bar();
+      bar();
+    </script>
+  </body>
+</html>

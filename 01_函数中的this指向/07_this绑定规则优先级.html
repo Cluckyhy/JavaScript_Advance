@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07_this绑定规则优先级</title>
+    <!-- 
+      new > bind显式绑定 > call/apply (nwe不可以和 call/apply一起使用) > 隐式绑定 > 默认绑定
+     -->
+  </head>
+  <body>
+    <script type="text/javascript">
+      function foo() {
+        console.log("foo函数", this);
+      }
+
+      // 1、显式绑定的优先级高于隐式绑定
+      // var obj = { foo: foo };
+      // obj.foo.call("chy");
+
+      // 2、bind高于默认绑定
+      // var bar = foo.bind("lulu");
+      // var obj = {
+      //   name: "chy",
+      //   baz: bar,
+      // };
+      // obj.baz();
+
+      // 3、new绑定优先级高于隐式绑定
+      // var obj = {
+      //   name: "chy",
+      //   foo: function () {
+      //     console.log("foo", this);
+      //   },
+      // };
+
+      // new obj.foo();
+
+      // 4、new 和 bind 的优先级
+      // function foo() {
+      //   console.log("foo", this);
+      // }
+      // var bindFn = foo.bind("aaa");
+      // new bindFn();
+
+      // 5、bind/(call/apply)优先级
+      function foo() {
+        console.log("foo", this);
+      }
+      var bindFn = foo.bind("aaa");
+      bindFn.call("bbb");
+      bindFn.apply('ccc')
+    </script>
+  </body>
+</html>

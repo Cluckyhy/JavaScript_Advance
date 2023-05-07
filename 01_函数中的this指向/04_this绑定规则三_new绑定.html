@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_this绑定规则三_new绑定</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /* 
+      new 关键字所做的事情
+        1、创建一个空对象
+        2、这个新对象会被执行 prototype 连接
+        3、将this指向这个空对象，执行函数中的代码
+        4、没有显示返回非空对象时，默认返回这个对象
+    */
+
+      function foo() {
+        console.log("foo函数", this);
+        this.name = 'chy'
+      }
+
+      new foo()
+    </script>
+  </body>
+</html>

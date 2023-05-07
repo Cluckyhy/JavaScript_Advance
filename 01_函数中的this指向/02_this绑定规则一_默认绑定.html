@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_this绑定规则一_默认绑定</title>
+    <!-- 
+      什么情况下使用默认绑定呢？
+        在独立函数调用时，我们可以理解为函数没有被绑定到某个对象上进行调用
+     -->
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 严格模式
+      // "use strict"
+      
+      // 定义函数
+      // 1、普通函数被独立的调用
+      function foo() {
+        console.log("foo函数", this);
+      }
+
+      foo();
+
+      // 2、函数定义在对象中，但是独立调用
+      var obj = {
+        name: "chy",
+        bar: function () {
+          console.log("bar", this);
+        },
+      };
+
+      var bar = obj.bar
+      bar()
+
+      // 3、严格模式下，独立调用的函数中的this指向的是 undefined
+
+      // 4、高阶函数
+      function test(fn){
+        fn()
+      }
+
+      test(obj.bar)
+    </script>
+  </body>
+</html>
