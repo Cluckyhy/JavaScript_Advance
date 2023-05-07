@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12_箭头函数中的this应用</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 网络请求的工具函数
+      function request(url, callbackFn) {
+        var result = ["abc", "bcd", "cde"];
+        callbackFn(result);
+      }
+
+      // 实际操作的位置（业务）
+      var obj = {
+        names: [],
+        network: function () {
+          // 1、早期做法
+          // var _this = this;
+          // request("/names", function (res) {
+          //   console.log(res);
+          //   _this.names = [].concat(result);
+          // });
+
+          // 2、箭头函数写法
+          request("/names", (res) => {
+            this.names = [].concat(result);
+          });
+        },
+      };
+
+      obj.network();
+    </script>
+  </body>
+</html>

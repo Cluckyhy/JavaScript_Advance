@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11_箭头函数中的this使用</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 1、普通函数中是有this的标识符
+      function foo() {
+        console.log("foo1", this);
+      }
+
+      foo();
+      foo.apply("chy");
+
+      // 2、箭头函数中，压根就没有this
+      var bar = () => {
+        var message = "chy";
+        console.log("bar", this);
+      };
+      bar();
+      // 通过call/apply调用函数，也不会有this
+      bar.call("lulu");
+
+      // 3、this的查找规则
+      var obj = {
+        name: "obj",
+        foo: function () {
+
+          var bar = () => {
+            console.log("bar2", this);
+          };
+          return bar;
+
+        },
+      };
+
+      var fn = obj.foo();
+      fn.apply("bbb");
+    </script>
+  </body>
+</html>
